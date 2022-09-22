@@ -18,3 +18,12 @@ print(deq_obj)  # -> deque(['a', 'b', 'c', 'd', 'e'])
 deq_obj.pop()
 deq_obj.popleft()
 print(deq_obj)  # -> deque(['b', 'c', 'd'])
+
+
+d = deque([i for i in range(5)], maxlen=7)
+d.append(5)
+d.appendleft(6)  # 6012345
+d.extend([7, 8, 9])  # 601 2345789 если сзади запихнули, спереди вывалилось(601)
+d.extendleft([10, 11])  # 111023457 если спереди зпихнули, сзади вывалилось - maxlen
+print(d)
+

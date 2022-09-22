@@ -14,6 +14,6 @@ RESUME_PARTS = RES(
 # print(type(RESUME_PARTS))
 print(RESUME_PARTS.second_name)  # -> Resume(id='1', first_name='Ivan',
                                                     # second_name='Ivanov')
-RESUME_PARTS.id = 10  # -> 1
+# RESUME_PARTS.id = 10  # -> 1
 
 
