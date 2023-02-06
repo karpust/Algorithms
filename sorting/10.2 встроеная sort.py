@@ -52,3 +52,26 @@ print(
 0.003860600059852004
 0.09319529996719211
 """
+
+"""
+https://www.w3schools.com/python/ref_list_sort.asp
+"""
+
+
+# A function that returns the length of the value:
+def my_func(word):
+    return len(word)
+
+
+cars = ['Ford', 'Mitsubishi', 'BMW', 'VW']
+
+cars.sort(key=my_func)  # ['VW', 'BMW', 'Ford', 'Mitsubishi']
+cars.sort(reverse=True, key=my_func)  # ['Mitsubishi', 'Ford', 'BMW', 'VW']
+# сортирует результ ф-ции
+
+
+lst = [2, 4, 1, 2, 5]
+dic = {i: lst[i] for i in range(len(lst))}
+dic = sorted(dic.items(), key=lambda x: x[1])  # 1 т к сортируем по values
+lst = [dic[i][0] for i in range(4)]
+print(lst)
