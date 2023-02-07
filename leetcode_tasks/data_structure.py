@@ -1241,6 +1241,8 @@ Example 3:
 Input: root = [1]
 Output: [1]
 """
+
+
 class Solution:
     def preorderTraversal(self, root: [TreeNode]) -> list[int]:
         """var 1, iteratively"""
@@ -1256,6 +1258,7 @@ class Solution:
                 stack.append(curr_node.right)
                 stack.append(curr_node.left)
         return res
+
     """
     суть решения в том что в стек попадает сначала сам узел а потом и его дети
      - это есть прямой обход дерева в глубину
@@ -1302,7 +1305,6 @@ root = binarytree_from_list(root)
 res = sol.preorderTraversal(root)
 assert res == [1, 2, 3], res
 
-
 """
 94. Binary Tree Inorder Traversal
 Easy
@@ -1326,6 +1328,7 @@ Constraints:
     -100 <= Node.val <= 100
 Follow up: Recursive solution is trivial, could you do it iteratively?
 """
+
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -1368,24 +1371,6 @@ class Solution:
             root = curr.right  # зашли в правого(чтобы обойти всех его левых)
 
 
-        # # this following "while True" block keeps running until "return"
-        # while True:
-        #     # goes all the way to left end's None, append every step onto "stack"
-        #     while root:
-        #         stack.append(root)
-        #         root = root.left
-        #
-        #     # if stack has nothing left, then return result
-        #     if not stack:
-        #         return res
-        #
-        #     # take the last step out, append its value to result
-        #     node = stack.pop()
-        #     res.append(node.val)
-        #     # moves to right before going all the way to left end's None again
-        #     root = node.right
-
-
 sol = Solution()
 """
      1
@@ -1397,4 +1382,74 @@ root = binarytree_from_list(root)
 res = sol.inorderTraversal(root)
 assert res == [4, 2, 1, 5, 3], res
 
+"""
+145. Binary Tree Postorder Traversal
+Easy
 
+Given the root of a binary tree, return the postorder traversal of its nodes' values.
+
+Example 1:
+Input: root = [1,null,2,3]
+Output: [3,2,1]
+
+Example 2:
+Input: root = []
+Output: []
+
+Example 3:
+Input: root = [1]
+Output: [1]
+
+Constraints:
+    The number of the nodes in the tree is in the range [0, 100].
+    -100 <= Node.val <= 100
+
+Follow up: Recursive solution is trivial, could you do it iteratively?
+"""
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def postorderTraversal(self, root: [TreeNode]) -> list[int]:
+        # var1: recursively
+        # res = []
+        # def dfs(root):
+        #     if root:
+        #         dfs(root.left)
+        #         dfs(root.right)
+        #         res.append(root.val)
+        #     return
+        # dfs(root)
+        # return res
+
+        # var: iteratively
+        res, stack = [], [(root, False)]
+        while stack:
+
+            node, visited = stack.pop()
+            if node:
+                if visited:  # узел visited если его дети в стеке
+                    res.append(node.val)
+                else:
+                    # post-order
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+        return res
+
+
+sol = Solution()
+"""
+      1
+  2       3
+4   5   6   7
+"""
+root = [1, 2, 3, 4, 6, 5, 7]
+root = binarytree_from_list(root)
+res = sol.postorderTraversal(root)
+assert res == [4, 6, 2, 5, 7, 3, 1], res
